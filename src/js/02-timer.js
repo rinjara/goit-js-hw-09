@@ -33,6 +33,7 @@ const options = {
     } else {
       Notify.success('Now you can start your Countdown');
       refs.startBtn.disabled = false;
+      timerUpdate();
       refs.startBtn.addEventListener('click', startTimer);
     }
   },
@@ -44,15 +45,30 @@ function startTimer() {
   timerId = setInterval(() => {
     refs.startBtn.disabled = true;
     refs.input.disabled = true;
-    const currentTime = Date.now();
-    const timeLeft = CHOOSEN_DATE - currentTime;
-    const timeComponents = convertMs(timeLeft);
-    updateTimerFace(timeComponents);
 
-    if (timeLeft <= 1000) {
-      stopTimer();
-    }
+    timerUpdate();
+
+    ////////////////// Вирішила винести окремо це в функцію function timerUpdate(),
+    ////////////////// щоб на початку вибору дати вона відображалася.
+
+    // const currentTime = Date.now();
+    // const timeLeft = CHOOSEN_DATE - currentTime;
+    // const timeComponents = convertMs(timeLeft);
+    // updateTimerFace(timeComponents);
+    // if (timeLeft <= 1000) {
+    //   stopTimer();
+    // }
   }, 1000);
+}
+
+function timerUpdate() {
+  const currentTime = Date.now();
+  const timeLeft = CHOOSEN_DATE - currentTime;
+  const timeComponents = convertMs(timeLeft);
+  updateTimerFace(timeComponents);
+  if (timeLeft <= 1000) {
+    stopTimer();
+  }
 }
 
 function stopTimer() {
