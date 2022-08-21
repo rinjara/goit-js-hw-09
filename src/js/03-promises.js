@@ -31,7 +31,7 @@ function onFormSubmit(e) {
   const amount = Number(refs.amount.value);
   const step = Number(refs.step.value);
   let delayRef = Number(refs.delay.value);
-  if (delayRef <= 0 || step < 0) {
+  if (delayRef <= 0 || step < 0 || amount < 0) {
     Notify.warning(`Numbers must be positive only!!!`);
     return;
   }
